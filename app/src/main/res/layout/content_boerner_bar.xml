@@ -8,21 +8,56 @@
     tools:context=".BoernerBarAct"
     tools:showIn="@layout/activity_boerner_bar">
 
-    <TextView
-        android:id="@+id/SomeTxt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Börner Bar"
-        android:textStyle="bold"
-        android:textSize="10pt"
-        android:textAlignment="center" />
+    <!--<TextView-->
+        <!--android:id="@+id/SomeTxt"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Börner Bar \n asdfasdf \ nasdfasdfasd\n asdfasdf"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textSize="10pt"-->
+        <!--android:textAlignment="center"-->
+
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/Some2Txt"-->
+        <!--android:layout_marginStart="10dp"-->
+
+
+
+        <!--/>-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/Some2Txt"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Happy Hour 20 - 21 Uhr"-->
+        <!--android:textSize="10pt"-->
+        <!--android:textAlignment="center"-->
+        <!--app:layout_constraintBottom_toTopOf="@id/cart"-->
+
+
+        <!--/>-->
 
     <TextView
-        android:id="@+id/Some2Txt"
+        android:id="@+id/announcementTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Happy Hour 20 - 21 Uhr"
-        android:textSize="10pt"
-        android:textAlignment="center" />
+
+        android:fontFamily="sans-serif"
+        android:text="Announcement\n Happy Hour 20 - 21 Uhr"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:paddingBottom="20dp"
+
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/cartList" />
+
+
+
+    <!-- TODO wie kann man besser die liste and den Bottom von dem Textview verknüpfen-->
+    <ListView
+        android:id="@+id/cartList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/announcementTxt" />
 
 </android.support.constraint.ConstraintLayout>
