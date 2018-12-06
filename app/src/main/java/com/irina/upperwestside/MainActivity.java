@@ -1,5 +1,6 @@
 package com.irina.upperwestside;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void addTouchListenerToAllButtons() {
         List<ImageButton> buttons = new ArrayList<>();
         buttons.add((ImageButton) findViewById(R.id.boernerBarBtn));
@@ -68,5 +70,10 @@ public class MainActivity extends AppCompatActivity {
     public void openBoernerBarAct(View view) {
         Intent boernerBarIntent = new Intent(MainActivity.this, BoernerBarAct.class);
         startActivity(boernerBarIntent);
+    }
+
+    public void openLocationsAct(View view) {
+        Intent locationsIntent = new Intent(MainActivity.this, LocationsAct.class);
+        startActivity(locationsIntent);
     }
 }
