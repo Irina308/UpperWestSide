@@ -11,13 +11,13 @@ public class BarMenuDatabase {
 
     private final static BarMenuItem[] MENU_ITEMS = {
             new BarMenuItem("Fanta", "€", 1.0),
-            new BarMenuItem("Becks", "€", 1.2),
-            new BarMenuItem("Cola", "€", 130.02),
-            new BarMenuItem("Eistee", "€", 1.9558),
+            new BarMenuItem("Cola", "€", 1.2),
+            new BarMenuItem("Sprite", "€", 130.02),
+            new BarMenuItem("Radler", "€", 1.9558),
+            new BarMenuItem("Fanta", "€", 27.473),
             new BarMenuItem("Sprite", "€", 27.473),
-            new BarMenuItem("Sprite", "€", 27.473),
-            new BarMenuItem("Sprite", "€", 27.473),
-            new BarMenuItem("Tee", "€", 13.1446)
+            new BarMenuItem("Radler", "€", 27.473),
+            new BarMenuItem("Cola", "€", 13.1446)
     };
 
     private final static Map<String, BarMenuItem> CURRENCIES_MAP = new HashMap<>();

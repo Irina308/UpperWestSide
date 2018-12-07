@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/c_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimaryDark"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Upper West Side" />
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="13dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1">
+
+
+
+            <ImageButton
+                android:id="@+id/hsUlmPrittwitzBtn"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="17dp"
+                android:background="@android:color/transparent"
+                android:onClick="showLocationInGMaps"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/location_ulm" />
+
+
+            <TextView
+                android:id="@+id/hsUlmPrittwitzTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Prittwitz Str"
+                android:textAlignment="center"
+                android:textColor="@color/colorLightFont"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/hsUlmPrittwitzTimeBtn"
+                android:layout_width="45dp"
+                android:layout_height="52dp"
+
+                android:layout_gravity="bottom|end"
+                android:background="@android:color/transparent"
+                android:onClick="showLocationInGMaps"
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/gmaps" />
+
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1">
+
+
+            <ImageButton
+                android:id="@+id/hsUlmEselsbergBtn"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="17dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="showLocationInGMaps"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/location_eselsberg" />
+
+            <TextView
+                android:id="@+id/hsUlmEselsbergTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Oberer Eselsberg"
+                android:textAlignment="center"
+                android:textColor="@color/colorLightFont"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/hsUlmEselsbergTimeBtn"
+                android:layout_width="45dp"
+                android:layout_height="52dp"
+
+                android:layout_gravity="bottom|end"
+                android:background="@android:color/transparent"
+                android:onClick="showLocationInGMaps"
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/gmaps" />
+
+        </FrameLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1">
+
+
+            <ImageButton
+                android:id="@+id/hsUlmBoefingenBtn"
+                android:layout_width="match_parent"
+                android:layout_height="115dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="17dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:onClick="showLocationInGMaps"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/location_boefingen" />
+
+            <TextView
+                android:id="@+id/hsUlmBoefingenTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Böfingen"
+                android:textAlignment="center"
+                android:textColor="@color/colorLightFont"
+                android:textSize="10pt"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:id="@+id/hsUlmBoefingenTimeBtn"
+                android:layout_width="45dp"
+                android:layout_height="52dp"
+
+                android:layout_gravity="bottom|end"
+                android:background="@android:color/transparent"
+                android:onClick="showLocationInGMaps"
+                android:paddingRight="20dp"
+                android:paddingBottom="30dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/gmaps" />
+            />
+
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

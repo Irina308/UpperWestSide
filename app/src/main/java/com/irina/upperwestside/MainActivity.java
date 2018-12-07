@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar cToolbar = (Toolbar) findViewById(R.id.c_toolbar);
+        Toolbar cToolbar = findViewById(R.id.c_toolbar);
         setSupportActionBar(cToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         addTouchListenerToAllButtons();
     }
