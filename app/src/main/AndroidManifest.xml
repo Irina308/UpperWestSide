@@ -28,8 +28,8 @@
             android:label="@string/title_activity_locations"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".FleemarketAct"
-            android:label="@string/title_activity_fleemarket"
+            android:name=".FleaMarketAct"
+            android:label="@string/title_activity_flea_market"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

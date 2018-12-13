@@ -6,25 +6,37 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.ListView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class FleemarketAct extends AppCompatActivity {
+public class FleaMarketAct extends AppCompatActivity {
+
+    FleaMarketItemDatabase fleaMarketDb = new FleaMarketItemDatabase();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fleemarket);
+        setContentView(R.layout.activity_flea_market);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        initList();
+    }
+
+    private void initList() {
+        ListView currencyListView = findViewById(R.id.flea_market_item_list);
+
+        // get all Images
+
+        FleaMarketAdapter myAdapter = new FleaMarketAdapter(fleaMarketDb.getFleaMarketItems(), this);
+        currencyListView.setAdapter(myAdapter);
     }
 
     public void onTakePhotoButtonClick(View view) {
@@ -36,15 +48,20 @@ public class FleemarketAct extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
+
+            // Open Intent for Details TODO
+            String imageId = String.valueOf(System.currentTimeMillis());
+            FleaMarketItem fleaMarketItem = new FleaMarketItem("item name", imageId, 2D);
+            this.fleaMarketDb.addFleaMarketItem(fleaMarketItem);
+
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            saveToInternalStorage(bitmap);
-            ImageView imageView = (ImageView) findViewById(R.id.fleemarket_img_btn_1);
-            imageView.setImageBitmap(bitmap);
+            saveToInternalStorage(bitmap, imageId);
         }
     }
 
-    private String saveToInternalStorage(Bitmap bitmapImage) {
-        String imageName = String.valueOf(System.currentTimeMillis()) + ".jpg";
+
+    private void saveToInternalStorage(Bitmap bitmapImage, String imageId) {
+        String imageName = imageId + ".jpg";
 
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
@@ -68,7 +85,7 @@ public class FleemarketAct extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        return directory.getAbsolutePath();
+        //   return directory.getAbsolutePath();
     }
 
 }

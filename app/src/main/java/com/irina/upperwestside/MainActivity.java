@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(locationsIntent);
     }
 
-    public void openFleemarketAct(View view) {
-        Intent fleemarketIntent = new Intent(MainActivity.this, FleemarketAct.class);
-        startActivity(fleemarketIntent);
+    public void openFleaMarketAct(View view) {
+        Intent fleaMarketIntent = new Intent(MainActivity.this, FleaMarketAct.class);
+        startActivity(fleaMarketIntent);
     }
 }
