@@ -1,5 +1,7 @@
 package com.irina.upperwestside;
 
+import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,11 @@ class FleaMarketItemDatabase {
         }
     }
 
+    public void setFleaMarketItems(List<FleaMarketItem> list){
+        FLEA_MARKET_ITEMS.clear();
+        FLEA_MARKET_ITEMS.addAll(list);
+    }
+
     private void initFleaMarket_Items() {
         // Get all images from Folder TODO
         // Get zugehörige Details aus XML?
@@ -26,7 +33,11 @@ class FleaMarketItemDatabase {
     }
 
     List<FleaMarketItem> getFleaMarketItems() {
+
         return FLEA_MARKET_ITEMS;
     }
+
+
+
 
 }
