@@ -7,10 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PriceDecimalFormatInputFilter implements InputFilter {
-    Pattern mPattern;
+   private  Pattern mPattern;
 
     PriceDecimalFormatInputFilter() {
-        mPattern=Pattern.compile("[0-9]{0,3}+((\\.[0-9]{0,1})?)||(\\.)?");
+       mPattern=Pattern.compile("[0-9]*((\\.[0-9]?)?)");
     }
 
     @Override

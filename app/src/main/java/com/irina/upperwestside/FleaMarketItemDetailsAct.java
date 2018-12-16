@@ -2,6 +2,7 @@ package com.irina.upperwestside;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
@@ -15,8 +16,14 @@ public class FleaMarketItemDetailsAct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flea_market_item_details);
+
+        Toolbar toolbar = findViewById(R.id.flea_market_item_details_toolbar);
+        setSupportActionBar(toolbar);
+
         EditText price_input = findViewById(R.id.item_price_input);
         price_input.setFilters(new InputFilter[] {new PriceDecimalFormatInputFilter()});
+
+
 
     }
 

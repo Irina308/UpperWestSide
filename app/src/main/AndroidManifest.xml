@@ -12,7 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,7 +31,11 @@
             android:name=".FleaMarketAct"
             android:label="@string/title_activity_flea_market"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FleaMarketItemDetailsAct"></activity>
+
+        <activity
+            android:name=".FleaMarketItemDetailsAct"
+            android:label="@string/title_activity_flea_market_item_details"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

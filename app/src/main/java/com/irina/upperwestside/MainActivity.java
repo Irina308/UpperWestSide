@@ -16,7 +16,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+/*
+RANDOM QUOTE API
 
+//Einfacher Body
+https://geek-jokes.sameerkumar.website/api
+
+//größerer json body
+https://api.chucknorris.io/jokes/random
+
+
+ */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar cToolbar = findViewById(R.id.c_toolbar);
         setSupportActionBar(cToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         addTouchListenerToAllButtons();
     }
@@ -41,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
         buttons.add((ImageButton) findViewById(R.id.boernerBarBtn));
         buttons.add((ImageButton) findViewById(R.id.fleaMarketBtn));
         buttons.add((ImageButton) findViewById(R.id.hsUlmBtn));
-        buttons.add((ImageButton) findViewById(R.id.volleyballBtn));
-        buttons.add((ImageButton) findViewById(R.id.washingMachineBtn));
+        buttons.add((ImageButton) findViewById(R.id.randomQuoteBtn));
 
         for (ImageButton button : buttons) {
             button.setOnTouchListener(new View.OnTouchListener() {
@@ -81,5 +89,8 @@ public class MainActivity extends AppCompatActivity {
     public void openFleaMarketAct(View view) {
         Intent fleaMarketIntent = new Intent(MainActivity.this, FleaMarketAct.class);
         startActivity(fleaMarketIntent);
+    }
+
+    public void openRandomQuoteAct(View view) {
     }
 }
