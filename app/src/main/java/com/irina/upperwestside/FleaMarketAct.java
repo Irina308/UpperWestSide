@@ -43,6 +43,7 @@ public class FleaMarketAct extends AppCompatActivity {
 
 
     public void onTakePhotoButtonClick(View view) {
+        // TODO please take picture in landscape mode
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, 101); // 101 requestCode
     }
@@ -52,10 +53,15 @@ public class FleaMarketAct extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
 
-            // Open Intent for Details TODO
-            String imageId = String.valueOf(System.currentTimeMillis()); // einfache ID generierung für diese Zwecke ausreichend, eigentlich sollte ein IDGenerator verwendet werden
+           // einfache ID generierung für diese Zwecke ausreichend, eigentlich sollte ein IDGenerator verwendet werden
+            String imageId = String.valueOf(System.currentTimeMillis());
 
-            this.fleaMarketDb.addToFleaMarketDb(imageId, "some description");
+
+            Intent fleaMarketItemDetailsIntent = new Intent(FleaMarketAct.this, FleaMarketItemDetailsAct.class);
+            fleaMarketItemDetailsIntent.putExtra("imageId", imageId);
+            startActivity(fleaMarketItemDetailsIntent);
+
+//            this.fleaMarketDb.addToFleaMarketDb(imageId, "some description");
 
             Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
             saveToInternalStorage(bitmap, imageId);

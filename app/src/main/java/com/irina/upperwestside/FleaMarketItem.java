@@ -1,30 +1,32 @@
 package com.irina.upperwestside;
 
 public class FleaMarketItem {
-    private String itemName;
-    private double itemId;
-    private String imageName;
+    private String itemTitle;
+    private String itemDescription;
+    private double itemPrice;
+    private String imageId;
 
 
-    public FleaMarketItem(String itemName, String imageName, double itemPrice) {
-        this.itemName = itemName;
-        this.itemId = itemPrice;
-        this.imageName = imageName;
+    FleaMarketItem(String itemTitle, String itemDescription, String imageName, double itemPrice) {
+        this.itemTitle = itemTitle;
+        this.itemDescription = itemDescription;
+        this.itemPrice = itemPrice;
+        this.imageId = imageName;
     }
 
-    public void setItemId(double itemId) {
-        this.itemId = itemId;
+    String getItemDescription() {
+        return itemDescription;
     }
 
-    public String getItemName() {
-        return itemName;
+    String getImageId() {
+        return imageId;
     }
 
-    public String getImageId() {
-        return imageName;
+    String getTitle() {
+        return itemTitle;
     }
 
-    public double getItemId() {
-        return itemId;
+    double getItemPrice() {
+        return itemPrice;
     }
 }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class FleaMarketAdapter extends BaseAdapter {
@@ -57,9 +58,6 @@ public class FleaMarketAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.flea_market_item, null, false); //R.layout.list_entry == meine neu erstellte list_entry.xml
         }
 
-        TextView fleaMarketItemTxtView = convertView.findViewById(R.id.flea_market_item_name_txt);
-        fleaMarketItemTxtView.setText(entry.getImageId());
-
 
         ContextWrapper cw = new ContextWrapper(this.context.getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
@@ -77,8 +75,15 @@ public class FleaMarketAdapter extends BaseAdapter {
             flagIconImageView.setImageResource(defaultPicIdentifier);
         }
 
-        TextView menuItemPriceTxt = convertView.findViewById(R.id.flea_market_item_name_txt);
-        menuItemPriceTxt.setText(String.valueOf(entry.getItemId()));
+        TextView fleaMarketItemDescriptionTxtView = convertView.findViewById(R.id.flea_market_item_description_txt);
+        fleaMarketItemDescriptionTxtView.setText(String.valueOf(entry.getItemDescription()));
+
+        TextView fleaMarketItemTitleTxtView = convertView.findViewById(R.id.flea_market_item_title);
+        fleaMarketItemTitleTxtView.setText(String.valueOf(entry.getTitle()));
+
+        TextView fleaMarketItemPriceTxtView = convertView.findViewById(R.id.flea_market_item_price_txt);
+        fleaMarketItemPriceTxtView.setText(String.valueOf(new DecimalFormat("#.00").format(entry.getItemPrice())).concat(" EUR"));
+
 
         return convertView;
     }
