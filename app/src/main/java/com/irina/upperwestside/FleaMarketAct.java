@@ -1,33 +1,24 @@
 package com.irina.upperwestside;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class FleaMarketAct extends AppCompatActivity {
 
-    FleaMarketItemDatabase fleaMarketDb = new FleaMarketItemDatabase();
-
-    ImageDbHelper dbHelper = new ImageDbHelper(this);;
-
+    FleaMarketItemDatabase fleaMarketDb = new FleaMarketItemDatabase(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +28,7 @@ public class FleaMarketAct extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        updateFleaMarketItemsFromDB();// TODO an einem besseren ort machen
+        fleaMarketDb.updateFleaMarketItemsFromDB();// TODO an einem besseren ort machen
 
         initList();
     }
@@ -45,46 +36,9 @@ public class FleaMarketAct extends AppCompatActivity {
     private void initList() {
         ListView fleaMarketItemListView = findViewById(R.id.flea_market_item_list);
 
-        // get all Images
-
-
-
-//        FleaMarketAdapter myAdapter = new FleaMarketAdapter(fleaMarketDb.getFleaMarketItems(), this);
         // TODO was braucht der Adapter, damit er automatisch die liste aktualisiert, wie z.B. mit der statuischen LIste der elemente in einer klasse
         FleaMarketAdapter myAdapter = new FleaMarketAdapter(this.fleaMarketDb.getFleaMarketItems(), this);
         fleaMarketItemListView.setAdapter(myAdapter);
-    }
-
-    // REAL DATABASE
-
-    public void updateFleaMarketItemsFromDB(){
-        List<FleaMarketItem> result = new ArrayList<>();
-
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String [] projection = { // Columns to include in result
-            //    BaseColumns._ID,
-                ImageDbHelper.IMAGE_COL_ID,
-                ImageDbHelper.IMAGE_COL_DESCRITPION
-        };
-
-
-        // FILTER ROWS -> ich brauchs nicht, ich will einfach alle einträge
-        String selection = ImageDbHelper.IMAGE_TABLE + " = ?";
-        String [] selectionArgs = {""};
-
-        Cursor c = db.query(ImageDbHelper.IMAGE_TABLE, projection, null, null, null, null, null);
-
-
-        while (c.moveToNext()) {
-            String imageId = c.getString(c.getColumnIndexOrThrow(ImageDbHelper.IMAGE_COL_ID));
-            String description = c.getString(c.getColumnIndexOrThrow(ImageDbHelper.IMAGE_COL_DESCRITPION));
-
-            result.add(new FleaMarketItem(description, imageId, 20D));
-
-            Log.d("DatabaseTest", imageId);
-        }
-
-        fleaMarketDb.setFleaMarketItems(result);
     }
 
 
@@ -100,26 +54,10 @@ public class FleaMarketAct extends AppCompatActivity {
 
             // Open Intent for Details TODO
             String imageId = String.valueOf(System.currentTimeMillis()); // einfache ID generierung für diese Zwecke ausreichend, eigentlich sollte ein IDGenerator verwendet werden
-            //FleaMarketItem fleaMarketItem = new FleaMarketItem("item name", imageId, 2D);
 
+            this.fleaMarketDb.addToFleaMarketDb(imageId, "some description");
 
-            // DATABASEE
-            SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-            ContentValues values = new ContentValues();
-            values.put(ImageDbHelper.IMAGE_COL_ID, imageId);
-            values.put(ImageDbHelper.IMAGE_COL_DESCRITPION, "Some description");
-
-            //Insert data in table and return primary ID of new row
-            long newRowId = db.insert(ImageDbHelper.IMAGE_TABLE, null, values);
-
-            // DATABASE END
-
-            updateFleaMarketItemsFromDB();// TODO an einem besseren ort machen
-
-          //  this.fleaMarketDb.addFleaMarketItem(fleaMarketItem);
-
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
             saveToInternalStorage(bitmap, imageId);
         }
     }
