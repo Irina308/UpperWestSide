@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -22,7 +23,7 @@ RANDOM QUOTE API
 //Einfacher Body
 https://geek-jokes.sameerkumar.website/api
 
-//größerer json body
+//größerer json value
 https://api.chucknorris.io/jokes/random
 
 
@@ -36,6 +37,10 @@ https://api.chucknorris.io/jokes/random
         setSupportActionBar(cToolbar);
 
         addTouchListenerToAllButtons();
+
+        // TODO use thread
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
     @Override
@@ -92,5 +97,7 @@ https://api.chucknorris.io/jokes/random
     }
 
     public void openRandomQuoteAct(View view) {
+        Intent quoteIntent = new Intent(MainActivity.this, QuoteAct.class);
+        startActivity(quoteIntent);
     }
 }
