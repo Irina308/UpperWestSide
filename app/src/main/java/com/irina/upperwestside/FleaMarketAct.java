@@ -10,10 +10,13 @@ import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -46,10 +49,29 @@ public class FleaMarketAct extends AppCompatActivity {
     }
 
 
+//    public void onTakePhotoButtonClick(View view) {
+//        // TODO please take picture in landscape mode
+//
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        startActivityForResult(intent, 101); // 101 requestCode
+//    }
+
     public void onTakePhotoButtonClick(View view) {
-        // TODO please take picture in landscape mode
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, 101); // 101 requestCode
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setMessage("Please take the picture in landscape mode.")
+                .setTitle("Hint")
+
+                .setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(intent, 101); // 101 requestCode
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.show();
     }
 
     @Override

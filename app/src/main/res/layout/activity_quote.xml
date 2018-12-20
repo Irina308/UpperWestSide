@@ -1,24 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="55dp"
+    android:paddingStart="21dp"
+    android:paddingEnd="21dp"
+    android:paddingBottom="28dp"
+    app:title="Random Quote"
+    >
 
-
-
-
-    <TextView
-        android:id="@+id/random_quote_text"
+    <RelativeLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:layout_alignParentTop="true"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/random_quote_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            />
+    </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/randomQuoteBtn"
+    <RelativeLayout
+        android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Another quote"
-        android:onClick="getRandomQuote"/>
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/randomQuoteBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="Get another quote"
+            android:onClick="getRandomQuote"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
