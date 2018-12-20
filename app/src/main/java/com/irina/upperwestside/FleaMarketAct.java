@@ -2,13 +2,17 @@ package com.irina.upperwestside;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ListView;
 
 import java.io.File;
@@ -96,5 +100,31 @@ public class FleaMarketAct extends AppCompatActivity {
         }
         //   return directory.getAbsolutePath();
     }
+
+    public void createDeletionDialog(final String imageId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Delete item?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        fleaMarketDb.deleteItemAndImageFromFleaMarketDb(imageId);
+
+                        FleaMarketAdapter fleaMarketItemListAdapter = (FleaMarketAdapter) (((ListView) (findViewById(R.id.flea_market_item_list))).getAdapter());
+                        fleaMarketItemListAdapter.notifyDataSetChanged();
+
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.show();
+    }
+
 
 }

@@ -2,29 +2,34 @@ package com.irina.upperwestside;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
-import java.text.DecimalFormat;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static java.lang.Math.round;
 
 class FleaMarketItemDatabase {
 
     private final static List<FleaMarketItem> FLEA_MARKET_ITEMS = new ArrayList<>();
 
-    FleaMarketItemDbHelper dbHelper ;
+    private FleaMarketItemDbHelper dbHelper;
 
-    FleaMarketItemDatabase (Context context) {
+    private Context context;
+
+    FleaMarketItemDatabase(Context context) {
+        this.context = context;
         dbHelper = new FleaMarketItemDbHelper(context);
     }
 
 
-    private void setFleaMarketItems(List<FleaMarketItem> list){
+    private void setFleaMarketItems(List<FleaMarketItem> list) {
         FLEA_MARKET_ITEMS.clear();
         FLEA_MARKET_ITEMS.addAll(list);
         Collections.reverse(FLEA_MARKET_ITEMS);
@@ -34,11 +39,11 @@ class FleaMarketItemDatabase {
         return FLEA_MARKET_ITEMS;
     }
 
-    void updateFleaMarketItemsFromDB(){
+    void updateFleaMarketItemsFromDB() {
         List<FleaMarketItem> result = new ArrayList<>();
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        String [] projection = { // Columns to include in result
+        String[] projection = { // Columns to include in result
                 //    BaseColumns._ID,
                 FleaMarketItemDbHelper.IMAGE_COL_IMAGE_ID,
                 FleaMarketItemDbHelper.IMAGE_COL_DESCRITPION,
@@ -47,12 +52,7 @@ class FleaMarketItemDatabase {
         };
 
 
-        // FILTER ROWS -> ich brauchs nicht, ich will einfach alle einträge
-        String selection = FleaMarketItemDbHelper.IMAGE_TABLE + " = ?";
-        String [] selectionArgs = {""};
-
         Cursor c = db.query(FleaMarketItemDbHelper.IMAGE_TABLE, projection, null, null, null, null, null);
-
 
         while (c.moveToNext()) {
             String title = c.getString(c.getColumnIndexOrThrow(FleaMarketItemDbHelper.IMAGE_COL_TITLE));
@@ -62,15 +62,14 @@ class FleaMarketItemDatabase {
 
             result.add(new FleaMarketItem(title, description, imageId, price));
 
-            Log.d("DatabaseTest", imageId);
+            Log.d("ImageDB", c.toString());
         }
         c.close();
 
         this.setFleaMarketItems(result);
     }
 
-    public void addToFleaMarketDb(String title, String imageId, String description, double price){
-        // DATABASEE
+    void addToFleaMarketDb(String title, String imageId, String description, double price) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -79,11 +78,37 @@ class FleaMarketItemDatabase {
         values.put(FleaMarketItemDbHelper.IMAGE_COL_TITLE, title);
         values.put(FleaMarketItemDbHelper.IMAGE_COL_PRICE, price);
 
-        //Insert data in table and return primary ID of new row
-        long newRowId = db.insert(FleaMarketItemDbHelper.IMAGE_TABLE, null, values);
-
-        // DATABASE END
-
+        db.insert(FleaMarketItemDbHelper.IMAGE_TABLE, null, values);
         this.updateFleaMarketItemsFromDB();
+    }
+
+    void deleteItemAndImageFromFleaMarketDb(String imageId) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(FleaMarketItemDbHelper.IMAGE_COL_IMAGE_ID, imageId);
+
+        int deleteReturnCode = db.delete(FleaMarketItemDbHelper.IMAGE_TABLE, FleaMarketItemDbHelper.IMAGE_COL_IMAGE_ID + "=?", new String[]{imageId});
+        Toast toast = Toast.makeText(context, deleteReturnCode > 0 ? "Deleted item" : "Couldnt delete item!", Toast.LENGTH_LONG);
+        toast.show();
+
+        // Delete picture
+        deletePictureFromInternalStorage(imageId);
+        this.updateFleaMarketItemsFromDB();
+
+    }
+
+    private void deletePictureFromInternalStorage(String imageId) {
+        //TODO create FileHandler mit delete und insert methode
+        String imageName = imageId + ".jpg";
+
+        ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        // View - Tool Windows - Device File explorer
+
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File myPath = new File(directory, imageName);
+        myPath.delete();
     }
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,17 +20,19 @@ import java.util.List;
 
 public class FleaMarketAdapter extends BaseAdapter {
 
-    public static String DEFAULT_PIC_NAME = "pic_not_avail";
-
+    private String DEFAULT_PIC_NAME = "pic_not_avail";
 
     private List<FleaMarketItem> data;
 
-    private Context context;
+    private FleaMarketAct fleaMarketAct;
+
+    private FleaMarketItemDatabase fleaMarketItemDatabase;
 
 
-    public FleaMarketAdapter(List<FleaMarketItem> data, Context context) {
+    FleaMarketAdapter(List<FleaMarketItem> data, FleaMarketAct fleaMarketAct) {
         this.data = data;
-        this.context = context;
+        this.fleaMarketAct = fleaMarketAct;
+        this.fleaMarketItemDatabase = new FleaMarketItemDatabase(fleaMarketAct);
     }
 
 
@@ -50,8 +53,8 @@ public class FleaMarketAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Context context = parent.getContext();
-        FleaMarketItem entry = data.get(position);
+        final Context context = parent.getContext();
+        final FleaMarketItem entry = data.get(position);
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -59,7 +62,7 @@ public class FleaMarketAdapter extends BaseAdapter {
         }
 
 
-        ContextWrapper cw = new ContextWrapper(this.context.getApplicationContext());
+        ContextWrapper cw = new ContextWrapper(this.fleaMarketAct.getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
         // View - Tool Windows - Device File explorer
 
@@ -84,16 +87,23 @@ public class FleaMarketAdapter extends BaseAdapter {
         TextView fleaMarketItemPriceTxtView = convertView.findViewById(R.id.flea_market_item_price_txt);
         fleaMarketItemPriceTxtView.setText(String.valueOf(new DecimalFormat("#.00").format(entry.getItemPrice())).concat(" EUR"));
 
+        // Long push
+        flagIconImageView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                fleaMarketAct.createDeletionDialog(entry.getImageId());
+                return true;
+            }
+        });
 
         return convertView;
     }
+
 
     private Bitmap getBitmapImage(String imgPath, String imgName) {
         try {
             File f = new File(imgPath, imgName + ".jpg");
             return BitmapFactory.decodeStream(new FileInputStream(f));
-//            ImageView img=(ImageView)findViewById(R.id.image);
-//            img.setImageBitmap(b);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

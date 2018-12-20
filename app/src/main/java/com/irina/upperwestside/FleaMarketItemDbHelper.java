@@ -11,7 +11,6 @@ public class FleaMarketItemDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "Image.db";
 
-
     public static final String IMAGE_TABLE = "images";
 
     public static final String IMAGE_COL_IMAGE_ID = "imageID";
