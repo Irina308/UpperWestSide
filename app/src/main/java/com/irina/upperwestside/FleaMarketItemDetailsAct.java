@@ -21,9 +21,6 @@ public class FleaMarketItemDetailsAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flea_market_item_details);
 
-        Toolbar toolbar = findViewById(R.id.flea_market_item_details_toolbar);
-        setSupportActionBar(toolbar);
-
         EditText price_input = findViewById(R.id.item_price_input);
         price_input.setFilters(new InputFilter[]{new PriceDecimalFormatInputFilter()});
 

@@ -32,9 +32,6 @@ public class FleaMarketAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flea_market);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         fleaMarketDb.updateFleaMarketItemsFromDB();// TODO an einem besseren ort machen
 
         initList();

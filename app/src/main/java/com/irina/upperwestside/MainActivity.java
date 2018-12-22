@@ -37,11 +37,7 @@ https://api.chucknorris.io/jokes/random
         setSupportActionBar(cToolbar);
 
         addTouchListenerToAllButtons();
-
-        // TODO use thread
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-    }
+            }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
