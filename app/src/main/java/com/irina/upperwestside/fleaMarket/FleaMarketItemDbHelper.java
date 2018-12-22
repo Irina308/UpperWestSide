@@ -1,4 +1,4 @@
-package com.irina.upperwestside;
+package com.irina.upperwestside.fleaMarket;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,23 +7,21 @@ import android.provider.BaseColumns;
 
 public class FleaMarketItemDbHelper extends SQLiteOpenHelper {
 
-    public static final int DATABASE_VERSION = 1;
+    static final int DATABASE_VERSION = 1;
 
-    public static final String DATABASE_NAME = "Image.db";
+    static final String DATABASE_NAME = "Image.db";
 
-    public static final String IMAGE_TABLE = "images";
+    static final String IMAGE_TABLE = "images";
 
-    public static final String IMAGE_COL_IMAGE_ID = "imageID";
+    static final String IMAGE_COL_IMAGE_ID = "imageID";
 
-    public static final String IMAGE_COL_DESCRITPION = "description";
+    static final String IMAGE_COL_DESCRITPION = "description";
 
-    public static final String IMAGE_COL_TITLE = "title";
+    static final String IMAGE_COL_TITLE = "title";
 
-    public static final String IMAGE_COL_PRICE = "price";
+    static final String IMAGE_COL_PRICE = "price";
 
-
-
-    // SQL: CREATE TABLE image (_id INTEGER PRIMARY KEY, title TEXT, imdbId TEXT)
+    // SQL: CREATE TABLE image
     private static final String SQL_CREATE_ENTRIES = "CREATE TABLE IF NOT EXISTS " + IMAGE_TABLE + " ("
             + BaseColumns._ID + " INTEGER PRIMARY KEY, "
             + IMAGE_COL_TITLE + " TEXT,"
@@ -34,7 +32,7 @@ public class FleaMarketItemDbHelper extends SQLiteOpenHelper {
     //SQL: DROP TABLE IF EXISTS image
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + IMAGE_TABLE;
 
-    public FleaMarketItemDbHelper(Context context) {
+    FleaMarketItemDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

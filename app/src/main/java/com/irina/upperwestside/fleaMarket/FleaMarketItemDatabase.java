@@ -1,4 +1,4 @@
-package com.irina.upperwestside;
+package com.irina.upperwestside.fleaMarket;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.ContextWrapper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import java.io.File;

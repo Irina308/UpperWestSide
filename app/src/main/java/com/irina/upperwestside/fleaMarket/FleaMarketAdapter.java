@@ -1,5 +1,6 @@
-package com.irina.upperwestside;
+package com.irina.upperwestside.fleaMarket;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
@@ -10,13 +11,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.irina.upperwestside.R;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Objects;
 
 public class FleaMarketAdapter extends BaseAdapter {
 
@@ -26,13 +29,11 @@ public class FleaMarketAdapter extends BaseAdapter {
 
     private FleaMarketAct fleaMarketAct;
 
-    private FleaMarketItemDatabase fleaMarketItemDatabase;
 
 
     FleaMarketAdapter(List<FleaMarketItem> data, FleaMarketAct fleaMarketAct) {
         this.data = data;
         this.fleaMarketAct = fleaMarketAct;
-        this.fleaMarketItemDatabase = new FleaMarketItemDatabase(fleaMarketAct);
     }
 
 
@@ -51,6 +52,7 @@ public class FleaMarketAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final Context context = parent.getContext();
@@ -58,7 +60,7 @@ public class FleaMarketAdapter extends BaseAdapter {
 
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.flea_market_item, null, false); //R.layout.list_entry == meine neu erstellte list_entry.xml
+            convertView = Objects.requireNonNull(inflater).inflate(R.layout.flea_market_item, null, false); //R.layout.list_entry == meine neu erstellte list_entry.xml
         }
 
 

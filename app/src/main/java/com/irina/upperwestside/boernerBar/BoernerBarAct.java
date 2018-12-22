@@ -1,4 +1,4 @@
-package com.irina.upperwestside;
+package com.irina.upperwestside.boernerBar;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.irina.upperwestside.R;
 
 import java.util.Arrays;
 

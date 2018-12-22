@@ -1,14 +1,12 @@
-package com.irina.upperwestside;
+package com.irina.upperwestside.location;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageButton;
+
+import com.irina.upperwestside.R;
 
 public class LocationsAct extends AppCompatActivity {
 
@@ -22,17 +20,17 @@ public class LocationsAct extends AppCompatActivity {
         String requestTerm = "Ulm";
         switch (view.getId()) {
             case R.id.hsUlmPrittwitzTxt:
-            case R.id.hsUlmPrittwitzTimeBtn:
+            case R.id.hsUlmPrittwitzGMapsBtn:
             case R.id.hsUlmPrittwitzBtn:
                 requestTerm = "Hs Ulm Prittwitzstraße";
                 break;
             case R.id.hsUlmBoefingenTxt:
-            case R.id.hsUlmBoefingenTimeBtn:
+            case R.id.hsUlmBoefingenGMapsBtn:
             case R.id.hsUlmBoefingenBtn:
                 requestTerm = "Hs Ulm Böfingen";
                 break;
             case R.id.hsUlmEselsbergTxt:
-            case R.id.hsUlmEselsbergTimeBtn:
+            case R.id.hsUlmEselsbergGMapsBtn:
             case R.id.hsUlmEselsbergBtn:
                 requestTerm = "Hs Ulm Oberer Eselsberg";
                 break;

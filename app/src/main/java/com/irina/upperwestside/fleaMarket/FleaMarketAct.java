@@ -1,4 +1,4 @@
-package com.irina.upperwestside;
+package com.irina.upperwestside.fleaMarket;
 
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -9,14 +9,10 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.irina.upperwestside.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,18 +36,10 @@ public class FleaMarketAct extends AppCompatActivity {
     private void initList() {
         ListView fleaMarketItemListView = findViewById(R.id.flea_market_item_list);
 
-        // TODO was braucht der Adapter, damit er automatisch die liste aktualisiert, wie z.B. mit der statuischen LIste der elemente in einer klasse
         FleaMarketAdapter myAdapter = new FleaMarketAdapter(this.fleaMarketDb.getFleaMarketItems(), this);
         fleaMarketItemListView.setAdapter(myAdapter);
     }
 
-
-//    public void onTakePhotoButtonClick(View view) {
-//        // TODO please take picture in landscape mode
-//
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        startActivityForResult(intent, 101); // 101 requestCode
-//    }
 
     public void onTakePhotoButtonClick(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -59,15 +47,14 @@ public class FleaMarketAct extends AppCompatActivity {
         builder.setMessage("Please take the picture in landscape mode.")
                 .setTitle("Hint")
 
-                .setPositiveButton("OK",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         startActivityForResult(intent, 101); // 101 requestCode
                     }
                 });
 
         AlertDialog dialog = builder.create();
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         dialog.show();
     }
 
@@ -76,15 +63,12 @@ public class FleaMarketAct extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
 
-           // einfache ID generierung für diese Zwecke ausreichend, eigentlich sollte ein IDGenerator verwendet werden
+            // einfache ID generierung für diese Zwecke ausreichend, eigentlich sollte ein IDGenerator verwendet werden
             String imageId = String.valueOf(System.currentTimeMillis());
-
 
             Intent fleaMarketItemDetailsIntent = new Intent(FleaMarketAct.this, FleaMarketItemDetailsAct.class);
             fleaMarketItemDetailsIntent.putExtra("imageId", imageId);
             startActivity(fleaMarketItemDetailsIntent);
-
-//            this.fleaMarketDb.addToFleaMarketDb(imageId, "some description");
 
             Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
             saveToInternalStorage(bitmap, imageId);
@@ -111,10 +95,12 @@ public class FleaMarketAct extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (fos != null) {
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
         //   return directory.getAbsolutePath();
@@ -141,7 +127,6 @@ public class FleaMarketAct extends AppCompatActivity {
                 });
 
         AlertDialog dialog = builder.create();
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         dialog.show();
     }
 

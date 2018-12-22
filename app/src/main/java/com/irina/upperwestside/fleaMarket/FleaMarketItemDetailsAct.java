@@ -1,11 +1,12 @@
-package com.irina.upperwestside;
+package com.irina.upperwestside.fleaMarket;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
+
+import com.irina.upperwestside.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

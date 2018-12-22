@@ -1,9 +1,10 @@
-package com.irina.upperwestside;
+package com.irina.upperwestside.quote;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.irina.upperwestside.R;
 
 
 public class QuoteAct extends AppCompatActivity {

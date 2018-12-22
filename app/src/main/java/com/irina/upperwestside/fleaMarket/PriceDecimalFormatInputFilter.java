@@ -1,4 +1,4 @@
-package com.irina.upperwestside;
+package com.irina.upperwestside.fleaMarket;
 
 import android.text.InputFilter;
 import android.text.Spanned;

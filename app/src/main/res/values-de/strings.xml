@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Upper West Side</string>
+    <string name="title_activity_boerner_bar">Börner Bar</string>
+    <string name="title_activity_locations">Standorte der Hochschule</string>
+    <string name="title_activity_flea_market">Flohmarkt</string>
+    <string name="title_activity_flea_market_item_details">Details</string>
+    <string name="title_activity_quote">Random Quote</string>
+</resources>

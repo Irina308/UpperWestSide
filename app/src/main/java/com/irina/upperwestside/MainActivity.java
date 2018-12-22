@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,21 +12,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.irina.upperwestside.boernerBar.BoernerBarAct;
+import com.irina.upperwestside.fleaMarket.FleaMarketAct;
+import com.irina.upperwestside.location.LocationsAct;
+import com.irina.upperwestside.quote.QuoteAct;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-/*
-RANDOM QUOTE API
 
-//Einfacher Body
-https://geek-jokes.sameerkumar.website/api
-
-//größerer json value
-https://api.chucknorris.io/jokes/random
-
-
- */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

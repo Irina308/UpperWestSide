@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="13dp">
+
+    <Button
+        android:id="@+id/flea_market_upload_pic"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="13dp">
 
-        <Button
-            android:id="@+id/flea_market_upload_pic"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:onClick="onTakePhotoButtonClick"
-            android:text="Upload new Item"
-            android:layout_marginBottom="13dp"
-            />
+        android:onClick="onTakePhotoButtonClick"
+        android:text="Upload new Item"
+        android:layout_marginBottom="13dp"
+        />
 
 
-        <ListView
-            android:id="@+id/flea_market_item_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-           />
+    <ListView
+        android:id="@+id/flea_market_item_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        />
 
 
-    </LinearLayout>
+</LinearLayout>
 
 

@@ -1,4 +1,4 @@
-package com.irina.upperwestside;
+package com.irina.upperwestside.fleaMarket;
 
 public class FleaMarketItem {
     private String itemTitle;

@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -23,23 +23,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".BoernerBarAct"
+            android:name=".boernerBar.BoernerBarAct"
             android:label="@string/title_activity_boerner_bar"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LocationsAct"
+            android:name=".location.LocationsAct"
             android:label="@string/title_activity_locations"
             />
         <activity
-            android:name=".FleaMarketAct"
+            android:name=".fleaMarket.FleaMarketAct"
             android:label="@string/title_activity_flea_market"
             />
         <activity
-            android:name=".FleaMarketItemDetailsAct"
+            android:name=".fleaMarket.FleaMarketItemDetailsAct"
             android:label="@string/title_activity_flea_market_item_details"
              />
         <activity
-            android:name=".QuoteAct"
+            android:name=".quote.QuoteAct"
             android:label="@string/title_activity_quote"
            />
     </application>
