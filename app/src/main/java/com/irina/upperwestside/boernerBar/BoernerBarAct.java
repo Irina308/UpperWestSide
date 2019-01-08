@@ -2,6 +2,7 @@ package com.irina.upperwestside.boernerBar;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,9 +24,11 @@ public class BoernerBarAct extends AppCompatActivity {
 
     private static String superPassword = "1";
 
-    BarMenuDatabase barMenuDatabase = new BarMenuDatabase();
+    private BarMenuDatabase barMenuDatabase = new BarMenuDatabase();
 
-    Context context = this;
+    private Context context = this;
+
+    private TextView announcementTxtView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +39,35 @@ public class BoernerBarAct extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         initList();
+
+        this.announcementTxtView = findViewById(R.id.announcementTxt);
     }
 
-    private void createPwDialog() {
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        String currAnnouncementText = announcementTxtView.getText().toString();
+        editor.putString("BoernerBarAnnouncement", currAnnouncementText);
+        editor.apply();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
+        String announcementTxt = prefs.getString("BoernerBarAnnouncement", "Open 20 PM - 2 AM");
+        announcementTxtView.setText(announcementTxt);
+    }
+
+    private void createPasswordDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         final EditText inputPw = new EditText(this);
         inputPw.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
-// 2. Chain together various setter methods to set the dialog characteristics
         builder.setMessage("You have to enter a password before you can change the text ")
                 .setTitle("Password required")
                 .setView(inputPw)
@@ -63,55 +86,39 @@ public class BoernerBarAct extends AppCompatActivity {
                 })
                 .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
                         dialog.cancel();
                     }
                 });
 
-// 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
         AlertDialog dialog = builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         dialog.show();
     }
 
     private void createChangeAnnouncementDialog() {
-        // 1. Instantiate an <code><a href="/reference/android/app/AlertDialog.Builder.html">AlertDialog.Builder</a></code> with its constructor
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
 
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         input.setLines(4);
 
-// 2. Chain together various setter methods to set the dialog characteristics
         builder.setMessage("Enter new announcement: ")
                 .setTitle("Announcement")
                 .setView(input)
-             //   .setView(this.getLayoutInflater().inflate(R.layout.dialog_signin, null))
 
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, close
-                        // current activity
-
-
-                       String m_Text = input.getText().toString();
-                        TextView ann = (TextView) findViewById(R.id.announcementTxt);
-                        ann.setText(m_Text);
-
-                       // BoernerBarAct.this.finish();
+                        String m_Text = input.getText().toString();
+                        TextView announcementTxt = findViewById(R.id.announcementTxt);
+                        announcementTxt.setText(m_Text);
                     }
                 })
                 .setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
                         dialog.cancel();
                     }
                 });
 
-// 3. Get the <code><a href="/reference/android/app/AlertDialog.html">AlertDialog</a></code> from <code><a href="/reference/android/app/AlertDialog.Builder.html#create()">create()</a></code>
         AlertDialog dialog = builder.create();
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         dialog.show();
@@ -127,7 +134,7 @@ public class BoernerBarAct extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.UpdateAnnouncement:
-                this.createPwDialog();
+                this.createPasswordDialog();
                 return true;
 
             default:
@@ -137,7 +144,6 @@ public class BoernerBarAct extends AppCompatActivity {
 
     private void initList(){
         ListView currencyListView = findViewById(R.id.cartList);
-
         BarMenuAdapter myAdapter = new BarMenuAdapter(Arrays.asList(this.barMenuDatabase.getBarMenuItems()));
         currencyListView.setAdapter(myAdapter);
     }

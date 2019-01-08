@@ -27,7 +27,7 @@ https://api.chucknorris.io/jokes/random
 
     private QuoteAct quoteAct;
 
-    private QuoteDto quote;
+    private QuoteDto quoteDto;
 
     QuoteUpdateRunnable(QuoteAct quoteAct) {
         this.quoteAct = quoteAct;
@@ -37,14 +37,14 @@ https://api.chucknorris.io/jokes/random
     public void run() {
         Log.i("RandomQuoteUpdate", "Start runnable");
         synchronized (QuoteUpdateRunnable.this) {
-            this.quote = getRandomQuote();
+            this.quoteDto = getRandomQuote();
         }
 
         quoteAct.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 TextView randomTxtView = quoteAct.findViewById(R.id.random_quote_text);
-                randomTxtView.setText(quote.getValue());
+                randomTxtView.setText(quoteDto.getValue());
             }
         });
 
@@ -60,9 +60,11 @@ https://api.chucknorris.io/jokes/random
             InputStream inputStream = connection.getInputStream();
 
             ObjectMapper mapper = new ObjectMapper();
-            return mapper.readValue(inputStream, QuoteDto.class);
+            QuoteDto quoteDto = mapper.readValue(inputStream, QuoteDto.class);
+            this.quoteAct.setQuoteDto(quoteDto);
+            return quoteDto;
         } catch (Exception e) {
-            Log.e("RandomQuote", "Cant query random quote API");
+            Log.e("RandomQuote", "Cant query random quoteDto API");
             e.printStackTrace();
         }
         return null;

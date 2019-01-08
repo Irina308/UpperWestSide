@@ -2,9 +2,11 @@ package com.irina.upperwestside.quote;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class QuoteDto {
+public class QuoteDto implements Serializable {
    private  String value;
 
     private String id;
