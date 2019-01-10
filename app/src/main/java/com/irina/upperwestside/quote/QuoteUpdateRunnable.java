@@ -35,7 +35,6 @@ https://api.chucknorris.io/jokes/random
 
     @Override
     public void run() {
-        Log.i("RandomQuoteUpdate", "Start runnable");
         synchronized (QuoteUpdateRunnable.this) {
             this.quoteDto = getRandomQuote();
         }
@@ -47,9 +46,6 @@ https://api.chucknorris.io/jokes/random
                 randomTxtView.setText(quoteDto.getValue());
             }
         });
-
-        Log.i("RandomQuoteUpdate", "End of runnable class");
-
     }
 
     private QuoteDto getRandomQuote() {
@@ -60,9 +56,7 @@ https://api.chucknorris.io/jokes/random
             InputStream inputStream = connection.getInputStream();
 
             ObjectMapper mapper = new ObjectMapper();
-            QuoteDto quoteDto = mapper.readValue(inputStream, QuoteDto.class);
-            this.quoteAct.setQuoteDto(quoteDto);
-            return quoteDto;
+            return mapper.readValue(inputStream, QuoteDto.class);
         } catch (Exception e) {
             Log.e("RandomQuote", "Cant query random quoteDto API");
             e.printStackTrace();
