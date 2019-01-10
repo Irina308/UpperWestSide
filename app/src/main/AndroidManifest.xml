@@ -28,20 +28,20 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".location.LocationsAct"
-            android:label="@string/title_activity_locations"
-            />
+            android:label="@string/title_activity_locations" />
         <activity
             android:name=".fleaMarket.FleaMarketAct"
-            android:label="@string/title_activity_flea_market"
-            />
+            android:label="@string/title_activity_flea_market" />
         <activity
             android:name=".fleaMarket.FleaMarketItemDetailsAct"
-            android:label="@string/title_activity_flea_market_item_details"
-             />
+            android:label="@string/title_activity_flea_market_item_details" />
         <activity
             android:name=".quote.QuoteAct"
-            android:label="@string/title_activity_quote"
             android:configChanges="orientation"
+            android:label="@string/title_activity_quote" />
+        <activity
+            android:name=".About"
+            android:label="@string/title_activity_about"
            />
     </application>
 

@@ -13,11 +13,6 @@
         android:title="About"
         app:showAsAction="never"
         />
-
-    <item
-        android:id="@+id/IdeasMenEntry"
-        android:title="Ideas"
-        app:showAsAction="never"
-        />
+    
 
 </menu>

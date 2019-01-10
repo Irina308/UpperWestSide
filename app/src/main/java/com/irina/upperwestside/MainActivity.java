@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -37,6 +38,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.AboutMenEntry:
+                Intent aboutIntent = new Intent(MainActivity.this, About.class);
+                startActivity(aboutIntent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -84,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     public void openFleaMarketAct(View view) {
         Intent fleaMarketIntent = new Intent(MainActivity.this, FleaMarketAct.class);
         startActivity(fleaMarketIntent);
-    }
+}
 
     public void openRandomQuoteAct(View view) {
         Intent quoteIntent = new Intent(MainActivity.this, QuoteAct.class);
