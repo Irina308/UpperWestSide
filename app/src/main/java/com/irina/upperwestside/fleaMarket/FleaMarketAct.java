@@ -21,6 +21,8 @@ import java.util.Objects;
 
 public class FleaMarketAct extends AppCompatActivity {
 
+    public static String INTENT_EXTRA_IMAGE_ID_KEY = "imageId";
+
     FleaMarketItemDatabase fleaMarketDb = new FleaMarketItemDatabase(this);
 
     @Override
@@ -28,7 +30,7 @@ public class FleaMarketAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flea_market);
 
-        fleaMarketDb.updateFleaMarketItemsFromDB();// TODO an einem besseren ort machen
+        fleaMarketDb.updateFleaMarketItemsFromDB();
 
         initList();
     }
@@ -43,10 +45,8 @@ public class FleaMarketAct extends AppCompatActivity {
 
     public void onTakePhotoButtonClick(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
         builder.setMessage("Please take the picture in landscape mode.")
                 .setTitle("Hint")
-
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -67,7 +67,7 @@ public class FleaMarketAct extends AppCompatActivity {
             String imageId = String.valueOf(System.currentTimeMillis());
 
             Intent fleaMarketItemDetailsIntent = new Intent(FleaMarketAct.this, FleaMarketItemDetailsAct.class);
-            fleaMarketItemDetailsIntent.putExtra("imageId", imageId);
+            fleaMarketItemDetailsIntent.putExtra(INTENT_EXTRA_IMAGE_ID_KEY, imageId);
             startActivity(fleaMarketItemDetailsIntent);
 
             Bitmap bitmap = (Bitmap) Objects.requireNonNull(data.getExtras()).get("data");
@@ -79,18 +79,15 @@ public class FleaMarketAct extends AppCompatActivity {
     private void saveToInternalStorage(Bitmap bitmapImage, String imageId) {
         String imageName = imageId + ".jpg";
 
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        // View - Tool Windows - Device File explorer
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());// path to: /data/data/yourapp/app_data/imageDir
+        // Debug, Show files in Android Studio: View - Tool Windows - Device File explorer
 
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
         File myPath = new File(directory, imageName);
 
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(myPath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,7 +100,6 @@ public class FleaMarketAct extends AppCompatActivity {
                 }
             }
         }
-        //   return directory.getAbsolutePath();
     }
 
     public void createDeletionDialog(final String imageId) {

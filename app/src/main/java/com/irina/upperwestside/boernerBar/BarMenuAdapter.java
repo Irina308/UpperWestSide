@@ -2,6 +2,7 @@ package com.irina.upperwestside.boernerBar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.irina.upperwestside.Constants;
 import com.irina.upperwestside.R;
 
 import java.text.DecimalFormat;
@@ -16,8 +18,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class BarMenuAdapter extends BaseAdapter {
-
-    private static String DEFAULT_PIC_NAME = "pic_not_avail";
 
     private List<BarMenuItem> data;
 
@@ -55,19 +55,22 @@ public class BarMenuAdapter extends BaseAdapter {
         barMenuItemNameTxt.setText(entry.getItemName());
 
         String menuItemDrawableName = "drink_" + entry.getItemName().toLowerCase();
-
         ImageView drinkPictureImageView = convertView.findViewById(R.id.drink_picture);
-
-        int drinkDrawableIdentifier = convertView.getResources().getIdentifier(menuItemDrawableName, "drawable", context.getPackageName()); // "com.irina.inf3moad:drawable/" null null
-        if (drinkDrawableIdentifier == 0) {
-            drinkDrawableIdentifier = convertView.getResources().getIdentifier(DEFAULT_PIC_NAME, "drawable", context.getPackageName()); // "com.irina.inf3moad:drawable/" null null
-        }
-
+        int drinkDrawableIdentifier = getDrinkDrawableIdentifier(convertView, context, menuItemDrawableName);
         drinkPictureImageView.setImageResource(drinkDrawableIdentifier);
 
         TextView menuItemPriceTxt = convertView.findViewById(R.id.menu_item_price_txt);
         menuItemPriceTxt.setText(String.valueOf( new DecimalFormat("#0.00").format(entry.getItemPrice())).concat(" EUR"));
 
         return convertView;
+    }
+
+    private int getDrinkDrawableIdentifier(View convertView, Context context, String menuItemDrawableName) {
+        int drinkDrawableIdentifier = convertView.getResources().getIdentifier(menuItemDrawableName, "drawable", context.getPackageName());
+        if (drinkDrawableIdentifier == 0) {
+            drinkDrawableIdentifier = convertView.getResources().getIdentifier(Constants.DEFAULT_PIC_NAME, "drawable", context.getPackageName());
+            Log.i("BarMenuAdapter", "Picture not found. Use default picture for drink in menu.");
+        }
+        return drinkDrawableIdentifier;
     }
 }

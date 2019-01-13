@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(cToolbar);
 
         addTouchListenerToAllButtons();
-            }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.AboutMenEntry:
                 Intent aboutIntent = new Intent(MainActivity.this, About.class);
                 startActivity(aboutIntent);
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                     ImageButton v1 = (ImageButton) v;
                     switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN: {
-                            v1.setColorFilter(Color.GRAY,PorterDuff.Mode.MULTIPLY);
+                            v1.setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
                             v.invalidate();
                             break;
                         }
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     public void openFleaMarketAct(View view) {
         Intent fleaMarketIntent = new Intent(MainActivity.this, FleaMarketAct.class);
         startActivity(fleaMarketIntent);
-}
+    }
 
     public void openRandomQuoteAct(View view) {
         Intent quoteIntent = new Intent(MainActivity.this, QuoteAct.class);

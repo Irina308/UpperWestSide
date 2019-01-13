@@ -2,7 +2,6 @@ package com.irina.upperwestside.quote;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.irina.upperwestside.R;
@@ -17,7 +16,6 @@ public class QuoteAct extends AppCompatActivity {
         setContentView(R.layout.activity_quote);
 
         this.showRandomQuote(null);
-        Log.i("RandomQuote", "onCreate -  not rotated");
     }
 
 

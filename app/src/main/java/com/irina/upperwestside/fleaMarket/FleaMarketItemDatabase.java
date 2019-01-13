@@ -43,13 +43,11 @@ class FleaMarketItemDatabase {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         String[] projection = { // Columns to include in result
-                //    BaseColumns._ID,
                 FleaMarketItemDbHelper.IMAGE_COL_IMAGE_ID,
                 FleaMarketItemDbHelper.IMAGE_COL_DESCRITPION,
                 FleaMarketItemDbHelper.IMAGE_COL_TITLE,
                 FleaMarketItemDbHelper.IMAGE_COL_PRICE
         };
-
 
         Cursor c = db.query(FleaMarketItemDbHelper.IMAGE_TABLE, projection, null, null, null, null, null);
 
@@ -98,16 +96,14 @@ class FleaMarketItemDatabase {
     }
 
     private void deletePictureFromInternalStorage(String imageId) {
-        //TODO create FileHandler mit delete und insert methode
         String imageName = imageId + ".jpg";
-
-        ContextWrapper cw = new ContextWrapper(context.getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        // View - Tool Windows - Device File explorer
+        ContextWrapper cw = new ContextWrapper(context.getApplicationContext());// path to /data/data/yourapp/app_data/imageDir
 
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
         File myPath = new File(directory, imageName);
-        myPath.delete();
+        boolean deleteResult = myPath.delete();
+        if(!deleteResult) {
+            Log.e("FleaMarketItemDB", "Failed to delete image with id: " + imageId);
+        }
     }
 }

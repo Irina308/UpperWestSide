@@ -1,6 +1,6 @@
 package com.irina.upperwestside.fleaMarket;
 
-public class FleaMarketItem {
+class FleaMarketItem {
     private String itemTitle;
     private String itemDescription;
     private double itemPrice;

@@ -56,7 +56,7 @@
                     android:id="@+id/boernerBarTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Börner Bar"
+                    android:text="@string/title_activity_boerner_bar"
                     android:textAlignment="center"
                     android:textColor="@color/colorLightFont"
                     android:textSize="10pt"
@@ -85,10 +85,9 @@
                     android:id="@+id/hochschuleUlmTxt"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
-                    android:text="Standorte der Hochschule"
                     android:textAlignment="center"
                     android:textColor="@color/colorLightFont"
-
+                    android:text="@string/title_activity_locations"
                     android:textSize="10pt"
 
                     android:textStyle="bold" />
@@ -117,7 +116,7 @@
                     android:id="@+id/fleaMarketTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Flea Market"
+                    android:text="@string/title_activity_flea_market"
                     android:textAlignment="center"
                     android:textColor="@color/colorLightFont"
 
@@ -149,7 +148,7 @@
                     android:id="@+id/randomQuoteTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Random Quote"
+                    android:text="@string/title_activity_quote"
                     android:textAlignment="center"
                     android:textColor="@color/colorLightFont"
 

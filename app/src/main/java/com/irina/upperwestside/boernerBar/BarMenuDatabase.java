@@ -1,9 +1,5 @@
 package com.irina.upperwestside.boernerBar;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 class BarMenuDatabase {
 
     private final static BarMenuItem[] MENU_ITEMS = {

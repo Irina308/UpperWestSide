@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.irina.upperwestside.Constants;
 import com.irina.upperwestside.R;
 
 import java.io.File;
@@ -23,12 +25,9 @@ import java.util.Objects;
 
 public class FleaMarketAdapter extends BaseAdapter {
 
-    private String DEFAULT_PIC_NAME = "pic_not_avail";
-
     private List<FleaMarketItem> data;
 
     private FleaMarketAct fleaMarketAct;
-
 
 
     FleaMarketAdapter(List<FleaMarketItem> data, FleaMarketAct fleaMarketAct) {
@@ -63,22 +62,11 @@ public class FleaMarketAdapter extends BaseAdapter {
             convertView = Objects.requireNonNull(inflater).inflate(R.layout.flea_market_item, null, false); //R.layout.list_entry == meine neu erstellte list_entry.xml
         }
 
-
         ContextWrapper cw = new ContextWrapper(this.fleaMarketAct.getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        // View - Tool Windows - Device File explorer
+        String directory = cw.getDir("imageDir", Context.MODE_PRIVATE).getAbsolutePath();// path to /data/data/yourapp/app_data/imageDir
 
-        String directory = cw.getDir("imageDir", Context.MODE_PRIVATE).getAbsolutePath();
-
-        ImageView flagIconImageView = convertView.findViewById(R.id.flea_market_item_img);
-
-        Bitmap bitmapImage = this.getBitmapImage(directory, entry.getImageId());
-        if (bitmapImage != null) {
-            flagIconImageView.setImageBitmap(bitmapImage);
-        } else {
-            int defaultPicIdentifier = convertView.getResources().getIdentifier(DEFAULT_PIC_NAME, "drawable", context.getPackageName()); // "com.irina.inf3moad:drawable/" null null
-            flagIconImageView.setImageResource(defaultPicIdentifier);
-        }
+        ImageView fleaMarketItemImageView = convertView.findViewById(R.id.flea_market_item_img);
+        setFleaMarketItemImageViewPicture(convertView, context, entry, directory, fleaMarketItemImageView);
 
         TextView fleaMarketItemDescriptionTxtView = convertView.findViewById(R.id.flea_market_item_description_txt);
         fleaMarketItemDescriptionTxtView.setText(String.valueOf(entry.getItemDescription()));
@@ -90,7 +78,7 @@ public class FleaMarketAdapter extends BaseAdapter {
         fleaMarketItemPriceTxtView.setText(String.valueOf(new DecimalFormat("#.00").format(entry.getItemPrice())).concat(" EUR"));
 
         // Long push
-        flagIconImageView.setOnLongClickListener(new View.OnLongClickListener() {
+        fleaMarketItemImageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 fleaMarketAct.createDeletionDialog(entry.getImageId());
@@ -101,14 +89,25 @@ public class FleaMarketAdapter extends BaseAdapter {
         return convertView;
     }
 
+    private void setFleaMarketItemImageViewPicture(View convertView, Context context, FleaMarketItem entry, String directory, ImageView fleaMarketItemImageView) {
+        Bitmap bitmapImage = this.getBitmapImageFromFileSystem(directory, entry.getImageId());
+        if (bitmapImage != null) {
+            fleaMarketItemImageView.setImageBitmap(bitmapImage);
+        } else {
+            int defaultPicIdentifier = convertView.getResources().getIdentifier(Constants.DEFAULT_PIC_NAME, "drawable", context.getPackageName()); // "com.irina.inf3moad:drawable/" null null
+            fleaMarketItemImageView.setImageResource(defaultPicIdentifier);
+        }
+    }
 
-    private Bitmap getBitmapImage(String imgPath, String imgName) {
+
+    private Bitmap getBitmapImageFromFileSystem(String imgPath, String imgName) {
         try {
             File f = new File(imgPath, imgName + ".jpg");
             return BitmapFactory.decodeStream(new FileInputStream(f));
         } catch (FileNotFoundException e) {
+            Log.i("FleaMarketAdapter", "Picture not found. Use default picture for flea market item.");
             e.printStackTrace();
         }
-        return null; // TODO default pic
+        return null;
     }
 }

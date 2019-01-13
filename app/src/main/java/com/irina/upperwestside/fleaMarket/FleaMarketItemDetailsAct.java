@@ -24,12 +24,10 @@ public class FleaMarketItemDetailsAct extends AppCompatActivity {
 
         EditText price_input = findViewById(R.id.item_price_input);
         price_input.setFilters(new InputFilter[]{new PriceDecimalFormatInputFilter()});
-
-
     }
 
     public void finishActivity(View view) {
-        String imageId = (String) getIntent().getSerializableExtra("imageId");
+        String imageId = (String) getIntent().getSerializableExtra(FleaMarketAct.INTENT_EXTRA_IMAGE_ID_KEY);
 
         EditText itemTitleInpEditText = findViewById(R.id.item_title_input);
         EditText itemPriceInput = findViewById(R.id.item_price_input);
@@ -42,7 +40,6 @@ public class FleaMarketItemDetailsAct extends AppCompatActivity {
                 notFilledRequiredFields.add(editText);
             }
         }
-
         if (!notFilledRequiredFields.isEmpty()) {
             for (EditText requField : notFilledRequiredFields) {
                 requField.setError("Required!");

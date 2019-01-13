@@ -5,6 +5,7 @@
     <string name="title_activity_locations">Standorte der Hochschule</string>
     <string name="title_activity_flea_market">Flohmarkt</string>
     <string name="title_activity_flea_market_item_details">Details</string>
-    <string name="title_activity_quote">Random Quote</string>
+    <string name="title_activity_quote">Zufälliges Zitat</string>
     <string name="title_activity_about">About</string>
+    <!-- Erste Phase: nur die Titel übersezten.-->
 </resources>

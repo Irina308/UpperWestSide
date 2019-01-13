@@ -22,7 +22,9 @@ import java.util.Arrays;
 
 public class BoernerBarAct extends AppCompatActivity {
 
-    private static String superPassword = "1";
+    private static String SUPER_PASSWORD = "1";
+
+    private static String ANNOUNCEMENT_SHARED_PREF_KEY = "BoernerBarAnnouncement";
 
     private BarMenuDatabase barMenuDatabase = new BarMenuDatabase();
 
@@ -43,14 +45,13 @@ public class BoernerBarAct extends AppCompatActivity {
         this.announcementTxtView = findViewById(R.id.announcementTxt);
     }
 
-
     @Override
     protected void onPause() {
         super.onPause();
         SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         String currAnnouncementText = announcementTxtView.getText().toString();
-        editor.putString("BoernerBarAnnouncement", currAnnouncementText);
+        editor.putString(ANNOUNCEMENT_SHARED_PREF_KEY, currAnnouncementText);
         editor.apply();
     }
 
@@ -58,7 +59,7 @@ public class BoernerBarAct extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         SharedPreferences prefs = getPreferences(Context.MODE_PRIVATE);
-        String announcementTxt = prefs.getString("BoernerBarAnnouncement", "Open 20 PM - 2 AM");
+        String announcementTxt = prefs.getString(ANNOUNCEMENT_SHARED_PREF_KEY, "Open 20 PM - 2 AM");
         announcementTxtView.setText(announcementTxt);
     }
 
@@ -75,7 +76,7 @@ public class BoernerBarAct extends AppCompatActivity {
                 .setPositiveButton("OK",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         String m_Text = inputPw.getText().toString();
-                        if(superPassword.equals(m_Text)){
+                        if(SUPER_PASSWORD.equals(m_Text)){
                             createChangeAnnouncementDialog();
                         } else {
                             Toast toast = Toast.makeText(context, "Wrong Password", Toast.LENGTH_LONG);
